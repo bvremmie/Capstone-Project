@@ -40,5 +40,3 @@ list_of_types = data['type'].to_list()
 #ASSIGN LISTS TO CORRESPONDING VARIABLES
 X = list_of_posts
 y = list_of_types
-
-# THIS IS JUST A TEST
