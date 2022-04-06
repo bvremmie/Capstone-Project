@@ -40,3 +40,31 @@ list_of_types = data['type'].to_list()
 #ASSIGN LISTS TO CORRESPONDING VARIABLES
 X = list_of_posts
 y = list_of_types
+
+functionWords = ["and", 'but', 'the', 'a', 'he', 'him', 'her', 'she', 'they', 'them', 'in', 'under', 'towards', 'before',
+                 'of', 'for', 'then', 'well', 'however', 'thus', 'would', 'could', 'should', 'on', 'down', 'this', 'if',
+                'also', 'or']
+
+stopWords = ['a', 'and', 'an', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'has', 'he', 'in', 'is', 'it', 'its', 'of', 'on',
+             'that', 'the', 'to', 'was', 'were', 'will', 'with', 'nor', 'yet', 'so', 'she', 'another', "do", "does", "for",
+             "your", "yours", "yourself", "yourselves", "you", "usually", "us", "until", "under", "use", "relate", "quite",
+             "none", "not", "to", "towards", "that", "those", "though", "through", "this", "then", "these", "thing", "their",
+             'other', 'of', 'often', 'after', 'any', 'anything', 'anybody', 'anyone', 'anyhow', 'anywhere', 'another', 'around',
+             'again', 'are', 'above', 'about', 'already', 'always', 'also', 'although', 'almost', 'all', 'very', 'get', 'both',
+             'getting', 'by', 'both', 'be', 'became', 'becomes', 'become', 'behind', 'between', 'beneath', 'been', 'below',
+             'besides', 'beside', 'much', 'must', 'meanwhile', 'mostly', 'most', 'moreover', 'more', 'he', 'hers', 'herself',
+             'her', 'had', 'having', 'have', 'has', 'him', 'himself', 'his', 'however', 'how', 'would', 'was', 'with', 'which',
+             'whichever', 'while', 'said', 'seem', 'seems', 'in', 'from', 'for', 'did', 'even']
+
+
+for i in range(len(X)):
+    for j in range(len(stopWords)):
+        X[i] = X[i].replace(' '+stopWords[j]+' ', ' ')
+        X[i] = X[i].replace(' '+stopWords[j].capitalize()+' ', ' ')
+
+
+for i in range(len(X)):
+    for j in range(len(functionWords)):
+        X[i] = X[i].replace(' '+functionWords[j]+' ', ' ')
+        X[i] = X[i].replace(' '+functionWords[j].capitalize()+' ', ' ')
+
