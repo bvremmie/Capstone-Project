@@ -56,15 +56,28 @@ stopWords = ['a', 'and', 'an', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'ha
              'her', 'had', 'having', 'have', 'has', 'him', 'himself', 'his', 'however', 'how', 'would', 'was', 'with', 'which',
              'whichever', 'while', 'said', 'seem', 'seems', 'in', 'from', 'for', 'did', 'even']
 
-
+# REMOVING STOP WORDS
 for i in range(len(X)):
     for j in range(len(stopWords)):
         X[i] = X[i].replace(' '+stopWords[j]+' ', ' ')
         X[i] = X[i].replace(' '+stopWords[j].capitalize()+' ', ' ')
 
-
+# REMOVING FUNCTION WORDS
 for i in range(len(X)):
     for j in range(len(functionWords)):
         X[i] = X[i].replace(' '+functionWords[j]+' ', ' ')
         X[i] = X[i].replace(' '+functionWords[j].capitalize()+' ', ' ')
 
+# REMOVING Y PERSONAL TYPES FROM POSTS IF THEY EXIST
+for i in range(len(list_of_posts)):
+    list_of_posts[i] = list_of_posts[i].replace(list_of_types[i], '')
+
+print(list_of_posts[1])
+
+#SPLIT DATA AND VECTORIZE
+X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=.9, stratify = y)
+
+count_vect = CountVectorizer()
+count_vect.fit(X_train)
+X_train_vect = count_vect.transform(X_train)
+X_test_vect = count_vect.transform(X_test)
