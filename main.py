@@ -81,3 +81,31 @@ count_vect = CountVectorizer()
 count_vect.fit(X_train)
 X_train_vect = count_vect.transform(X_train)
 X_test_vect = count_vect.transform(X_test)
+
+# CREATE LISTS FOR OCCURENCE TRAIT IN EACH PERSONALITY TYPE
+
+y_train_ie = []
+y_train_sn = []
+y_train_tf = []
+y_train_jp = []
+
+for label in y_train:
+    if "I" in label:
+        y_train_ie.append(0)
+    if "E" in label:
+        y_train_ie.append(1)
+    if "S" in label:
+        y_train_sn.append(0)
+    if "N" in label:
+        y_train_sn.append(1)
+    if "T" in label:
+        y_train_tf.append(0)
+    if "F" in label:
+        y_train_tf.append(1)
+    if "J" in label:
+        y_train_jp.append(0)
+    if "P" in label:
+        y_train_jp.append(1)
+
+#print(y_train_ie[:10])
+#print(y_train[:10])
