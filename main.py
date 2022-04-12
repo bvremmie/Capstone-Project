@@ -109,3 +109,51 @@ for label in y_train:
 
 #print(y_train_ie[:10])
 #print(y_train[:10])
+
+#CREATE FUNCTION TO MAKE SURE THERES A EVEN BALANCE OF LETTERS
+
+def even_traits_amt(y_train_traits, X_train):
+    first_trait_count = 0
+    second_trait_count = 0
+    X_train_traits_adj = []
+    y_train_traits_adj = []
+    first_trait_greater = False
+
+    if y_train_traits.count(0) > y_train_traits.count(1):
+        first_trait_greater = True
+        first_trait_limit = y_train_traits.count(1)
+    else:
+        second_trait_limit = y_train_traits.count(0)
+
+
+    for i in range(len(y_train_traits)):
+        if first_trait_greater:
+            if y_train_traits[i] == 1:
+                X_train_traits_adj.append(X_train[i])
+                y_train_traits_adj.append(y_train_traits[i])
+            else:
+                if first_trait_count < first_trait_limit:
+                    X_train_traits_adj.append(X_train[i])
+                    y_train_traits_adj.append(y_train_traits[i])
+                    first_trait_count += 1
+        else:
+            if y_train_traits[i] == 0:
+                X_train_traits_adj.append(X_train[i])
+                y_train_traits_adj.append(y_train_traits[i])
+            else:
+                if second_trait_count < second_trait_limit:
+                    X_train_traits_adj.append(X_train[i])
+                    y_train_traits_adj.append(y_train_traits[i])
+                    second_trait_count += 1
+
+    return X_train_traits_adj, y_train_traits_adj
+
+
+X_train_ie_adj, y_train_ie_adj = even_traits_amt(y_train_ie, X_train)
+print(f"I:{y_train_ie_adj.count(0)}, E:{y_train_ie_adj.count(1)}")
+X_train_sn_adj, y_train_sn_adj = even_traits_amt(y_train_sn, X_train)
+print(f"S:{y_train_sn_adj.count(0)}, N:{y_train_sn_adj.count(1)}")
+X_train_tf_adj, y_train_tf_adj = even_traits_amt(y_train_tf, X_train)
+print(f"T:{y_train_tf_adj.count(0)}, F:{y_train_tf_adj.count(1)}")
+X_train_jp_adj, y_train_jp_adj = even_traits_amt(y_train_jp, X_train)
+print(f"J:{y_train_jp_adj.count(0)}, P:{y_train_jp_adj.count(1)}")
