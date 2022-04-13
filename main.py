@@ -157,3 +157,12 @@ X_train_tf_adj, y_train_tf_adj = even_traits_amt(y_train_tf, X_train)
 print(f"T:{y_train_tf_adj.count(0)}, F:{y_train_tf_adj.count(1)}")
 X_train_jp_adj, y_train_jp_adj = even_traits_amt(y_train_jp, X_train)
 print(f"J:{y_train_jp_adj.count(0)}, P:{y_train_jp_adj.count(1)}")
+
+# I/E ADJ ADA SCORES 1-3
+my_decision_tree = RandomForestClassifier(max_depth=10, min_samples_leaf=20)
+aclf = AdaBoostClassifier(my_decision_tree, n_estimators=100)
+
+dt_pipe = Pipeline([('vect', CountVectorizer(ngram_range=(1,3))),('ie_aclf', aclf)])
+scores = cross_val_score(dt_pipe, X_train_ie_adj, y_train_ie_adj, cv=5, scoring = 'accuracy')
+print(scores.mean())
+scores
