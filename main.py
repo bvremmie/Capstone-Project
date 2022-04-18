@@ -111,7 +111,6 @@ for label in y_train:
 #print(y_train[:10])
 
 #CREATE FUNCTION TO MAKE SURE THERES A EVEN BALANCE OF LETTERS
-
 def even_traits_amt(y_train_traits, X_train):
     first_trait_count = 0
     second_trait_count = 0
@@ -168,11 +167,20 @@ print(scores.mean())
 print(scores)
 
 # S/N ADJ ADA SCORES 1-3
-
 my_decision_tree = RandomForestClassifier(max_depth=10, min_samples_leaf=20)
 aclf = AdaBoostClassifier(my_decision_tree, n_estimators=100)
 
 dt_pipe = Pipeline([('vect', CountVectorizer(ngram_range=(1,3))),('sn_aclf', aclf)])
 scores = cross_val_score(dt_pipe, X_train_sn_adj, y_train_sn_adj, cv=5, scoring = 'accuracy')
+print(scores.mean())
+print(scores)
+
+# T/F ADJ ADA SCORES 1-3
+
+my_decision_tree = RandomForestClassifier(max_depth=10, min_samples_leaf=20)
+aclf = AdaBoostClassifier(my_decision_tree, n_estimators=100)
+
+dt_pipe = Pipeline([('vect', CountVectorizer(ngram_range=(1,3))),('tf_aclf', aclf)])
+scores = cross_val_score(dt_pipe, X_train_tf_adj, y_train_tf_adj, cv=5, scoring = 'accuracy')
 print(scores.mean())
 print(scores)
