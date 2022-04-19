@@ -184,3 +184,13 @@ dt_pipe = Pipeline([('vect', CountVectorizer(ngram_range=(1,3))),('tf_aclf', acl
 scores = cross_val_score(dt_pipe, X_train_tf_adj, y_train_tf_adj, cv=5, scoring = 'accuracy')
 print(scores.mean())
 print(scores)
+
+#J/P ADJ ADA SCORES 1-3
+
+my_decision_tree = RandomForestClassifier(max_depth=10, min_samples_leaf=20)
+aclf = AdaBoostClassifier(my_decision_tree, n_estimators=100)
+
+dt_pipe = Pipeline([('vect', CountVectorizer(ngram_range=(1,3))),('jp_aclf', aclf)])
+scores = cross_val_score(dt_pipe, X_train_jp_adj, y_train_jp_adj, cv=5, scoring = 'accuracy')
+print(scores.mean())
+print(scores)
