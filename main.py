@@ -194,3 +194,20 @@ dt_pipe = Pipeline([('vect', CountVectorizer(ngram_range=(1,3))),('jp_aclf', acl
 scores = cross_val_score(dt_pipe, X_train_jp_adj, y_train_jp_adj, cv=5, scoring = 'accuracy')
 print(scores.mean())
 print(scores)
+
+# COUNT VECTORIZER FOR ADJUSTED LISTS
+count_vect_ie = CountVectorizer()
+count_vect_ie.fit(X_train_ie_adj)
+X_train_vect_ie = count_vect.transform(X_train_ie_adj)
+
+count_vect_sn = CountVectorizer()
+count_vect_sn.fit(X_train_sn_adj)
+X_train_vect_sn = count_vect.transform(X_train_sn_adj)
+
+count_vect_tf = CountVectorizer()
+count_vect_tf.fit(X_train_tf_adj)
+X_train_vect_tf = count_vect.transform(X_train_tf_adj)
+
+count_vect_jp = CountVectorizer()
+count_vect_jp.fit(X_train_jp_adj)
+X_train_vect_jp = count_vect.transform(X_train_jp_adj)
