@@ -211,3 +211,17 @@ X_train_vect_tf = count_vect.transform(X_train_tf_adj)
 count_vect_jp = CountVectorizer()
 count_vect_jp.fit(X_train_jp_adj)
 X_train_vect_jp = count_vect.transform(X_train_jp_adj)
+
+# CREATING ADABOOST FOR EACH TRAIT
+
+my_decision_tree = RandomForestClassifier(max_depth=10, min_samples_leaf=20)
+
+ie_aclf = AdaBoostClassifier(my_decision_tree, n_estimators=100)
+sn_aclf = AdaBoostClassifier(my_decision_tree, n_estimators=100)
+tf_aclf = AdaBoostClassifier(my_decision_tree, n_estimators=100)
+jp_aclf = AdaBoostClassifier(my_decision_tree, n_estimators=100)
+
+ie_aclf.fit(X_train_vect_ie, y_train_ie_adj)
+sn_aclf.fit(X_train_vect_sn, y_train_sn_adj)
+tf_aclf.fit(X_train_vect_tf, y_train_tf_adj)
+jp_aclf.fit(X_train_vect_jp, y_train_jp_adj)
