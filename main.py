@@ -225,3 +225,65 @@ ie_aclf.fit(X_train_vect_ie, y_train_ie_adj)
 sn_aclf.fit(X_train_vect_sn, y_train_sn_adj)
 tf_aclf.fit(X_train_vect_tf, y_train_tf_adj)
 jp_aclf.fit(X_train_vect_jp, y_train_jp_adj)
+
+#Combining TRAINING scores FOR ADA W/ AVG SCORE W CORRECT AVG SCORE
+
+num_right = 0
+num_wrong = 0
+score = 0
+
+for i in range(len(y_train)):
+    data_point = X_train_vect[i]
+    test_label = y_train[i]
+    ie = ie_aclf.predict(data_point)
+    sn = sn_aclf.predict(data_point)
+    tf = tf_aclf.predict(data_point)
+    jp = jp_aclf.predict(data_point)
+
+    ylabel = ""
+    if ie == 0:
+        ylabel += "I"
+        if "I" in test_label:
+            score += 1
+    else:
+        ylabel += "E"
+        if "E" in test_label:
+            score += 1
+
+    if sn == 0:
+        ylabel += "S"
+        if "S" in test_label:
+            score += 1
+    else:
+        ylabel += "N"
+        if "N" in test_label:
+            score += 1
+
+    if tf == 0:
+        ylabel += "T"
+        if "T" in test_label:
+            score += 1
+    else:
+        ylabel += "F"
+        if "F" in test_label:
+            score += 1
+
+    if jp == 0:
+        ylabel += "J"
+        if "J" in test_label:
+            score += 1
+    else:
+        ylabel += "P"
+        if "P" in test_label:
+            score += 1
+
+    if ylabel == test_label:
+        num_right += 1
+    else:
+        num_wrong += 1
+
+acc = num_right/(num_right+num_wrong)
+avgscore = score/(4*len(y_train))
+print(acc)
+print(score)
+print(avgscore)
