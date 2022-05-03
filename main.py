@@ -287,3 +287,65 @@ avgscore = score/(4*len(y_train))
 print(acc)
 print(score)
 print(avgscore)
+
+#Combining TEST scores FOR ADA W/ AVG SCORE
+
+num_right = 0
+num_wrong = 0
+score = 0
+
+for i in range(len(y_test)):
+    data_point = X_test_vect[i]
+    test_label = y_test[i]
+    ie = ie_aclf.predict(data_point)
+    sn = sn_aclf.predict(data_point)
+    tf = tf_aclf.predict(data_point)
+    jp = jp_aclf.predict(data_point)
+
+    ylabel = ""
+    if ie == 0:
+        ylabel += "I"
+        if "I" in test_label:
+            score += 1
+    else:
+        ylabel += "E"
+        if "E" in test_label:
+            score += 1
+
+    if sn == 0:
+        ylabel += "S"
+        if "S" in test_label:
+            score += 1
+    else:
+        ylabel += "N"
+        if "N" in test_label:
+            score += 1
+
+    if tf == 0:
+        ylabel += "T"
+        if "T" in test_label:
+            score += 1
+    else:
+        ylabel += "F"
+        if "F" in test_label:
+            score += 1
+
+    if jp == 0:
+        ylabel += "J"
+        if "J" in test_label:
+            score += 1
+    else:
+        ylabel += "P"
+        if "P" in test_label:
+            score += 1
+
+    if ylabel == test_label:
+        num_right += 1
+    else:
+        num_wrong += 1
+
+acc = num_right/(num_right+num_wrong)
+avgscore = score/(4*len(y_test))
+print(f"Accuracy: {acc}")
+print(f"Score: {score}")
+print(f"Avg Score: {avgscore}")
